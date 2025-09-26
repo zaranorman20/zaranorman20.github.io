@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zara Norman – Journalist Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #4E2A84;          /* Northwestern Purple - HEX #4E2A84 */
+      --primary-light: #8B6DB8;    /* Much lighter purple tint for better contrast */
+      --primary-lighter: #B19CD9;  /* Even lighter for hover states */
+      --primary-dark: #3D2168;     /* Northwestern Purple 120 shade */
+      --accent: #4E2A84;           /* Northwestern Purple */
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --bg-light: #ffffff;
+      --bg-section: #f9f9fb;       /* Very light purple tint */
+      --card-bg: #ffffff;
+      --border: #e5e0ee;           /* Light purple-tinted border */
+      --shadow: 0 4px 20px rgba(78,42,132,0.08);
+      --shadow-hover: 0 8px 30px rgba(78,42,132,0.15);
+      --gradient: linear-gradient(135deg, #4E2A84 0%, #6B4B9D 50%, #8B6DB8 100%);
+      --rich-black: #2c2c2c;       /* Rich black as specified in Northwestern guidelines */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-light);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(78, 42, 132, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      color: var(--text-light);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-lighter);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-lighter);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--gradient);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text {
+      color: var(--text-light);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero .description {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+      max-width: 600px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #d63851;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text-light);
+      color: var(--primary);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      margin: 0 auto;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 5px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Floating elements */
+    .floating-card {
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-card.award {
+      top: 10%;
+      right: -50px;
+      animation-delay: 0s;
+    }
+
+    .floating-card.location {
+      bottom: 20%;
+      left: -50px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    /* Work Grid */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .work-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .work-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .work-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .work-card h3 a {
+      text-decoration: none;
+      color: var(--text-dark);
+      transition: color 0.3s ease;
+    }
+
+    .work-card h3 a:hover {
+      color: var(--primary);
+    }
+
+    .work-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .work-publication {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .work-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Placeholder cards for future content */
+    .placeholder-card {
+      opacity: 0.8;
+      border: 2px dashed var(--border);
+      background: linear-gradient(135deg, var(--bg-section) 0%, var(--card-bg) 100%);
+      text-align: center;
+    }
+
+    .placeholder-card:hover {
+      opacity: 1;
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .placeholder-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+
+    .placeholder-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .placeholder-card .work-publication {
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: var(--bg-section);
+      margin: 0 -2rem;
+      padding: 5rem 2rem;
+    }
+
+    .contact-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: var(--card-bg);
+      border-radius: 50px;
+      text-decoration: none;
+      color: var(--text-dark);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .avatar-container {
+        width: 250px;
+        height: 250px;
+      }
+
+      .floating-card {
+        display: none;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-link {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+
+    /* Smooth scrolling offset for fixed header */
+    section[id] {
+      scroll-margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#home" class="logo">Zara Norman</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#investigative">Investigative</a></li>
+        <li><a href="#housing">Housing</a></li>
+        <li><a href="#breaking">Breaking News</a></li>
+        <li><a href="#multimedia">Multimedia</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Zara Norman</h1>
+        <p class="subtitle">Investigative Journalist &middot; Graduate Student</p>
+        <p class="description">
+        <strong>Chicago-based reporter</strong> pursuing a master’s in investigative journalism at <strong>Northwestern University's Medill School</strong>. Find samples of my published work below and follow along as I add new stories, multimedia projects and investigations here, too.
+        </p>
+        <div class="cta-buttons">
+          <a href="#investigative" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="avatar-container">
+          <img src="headshot.png" alt="Zara Norman" class="avatar">
+          <div class="floating-card award">
+            <strong>2x Winner</strong><br>
+            Maine Press Association
+          </div>
+          <div class="floating-card location">
+            <strong>Based in</strong><br>
+            Chicago, IL
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <div class="section-header">
+        <h2>About Me</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I’m a <strong>Chicago-based journalist</strong> pursuing a master’s in investigative journalism at <strong>Northwestern University's Medill School</strong> as a Paul Sagan ProPublica Medill Investigative Lab Scholar.
+          </p>
+          <p>
+            I'm a Brit, a bookworm and a <strong>Brown University</strong> alumna who spent the last three years working for daily newspapers in Maine, covering everything from town meetings and cheese festivals to contractor fraud and a mass shooting. I have won two 1st place awards from the <strong>Maine Press Association</strong> for my writing.
+          </p>
+          <p>
+           My best work, and the work I feel best about, is that which helps my readers make informed decisions and creates impact in my community. I'm passionate about writing watchdog stories that <strong>keep government honest</strong> and <strong>expose bad actors</strong> who exploit vulnerable people.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">2</span>
+            <span class="stat-label">1st Place Press Awards</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">4+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Daily stories Published</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">States covered</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="investigative">
+      <div class="section-header">
+        <h2>Investigative Work</h2>
+        <p>Accountability reporting that delivers impact</p>
+      </div>
+      <div class="work-grid" id="investigative-grid"></div>
+    </section>
+
+    <section id="housing">
+      <div class="section-header">
+        <h2>Housing Coverage</h2>
+        <p>Beat reporting examining every angle of Maine's housing crisis</p>
+      </div>
+      <div class="work-grid" id="housing-grid"></div>
+    </section>
+
+    <section id="breaking">
+      <div class="section-header">
+        <h2>Breaking News</h2>
+        <p>Quick turnarounds on high-stakes stories</p>
+      </div>
+      <div class="work-grid" id="breaking-grid"></div>
+    </section>
+
+    <section id="multimedia">
+      <div class="section-header">
+        <h2>Multimedia Projects</h2>
+        <p>Samples of video, audio and data visualization work</p>
+      </div>
+      <div class="work-grid" id="multimedia-grid"></div>
+      
+      <!-- Placeholder cards for future content -->
+      <div class="work-grid">
+        <div class="work-card placeholder-card">
+          <div class="placeholder-icon">🎥</div>
+          <h3>Video Journalism</h3>
+          <div class="work-meta">
+            <span class="work-publication">Coming Soon</span>
+            <span>2025</span>
+          </div>
+          <p>Space to upload class projects that show off my newfound video skills.</p>
+        </div>
+        
+        <div class="work-card placeholder-card">
+          <div class="placeholder-icon">🎙️</div>
+          <h3>Audio Storytelling</h3>
+          <div class="work-meta">
+            <span class="work-publication">Coming Soon</span>
+            <span>2025</span>
+          </div>
+          <p>Space to upload audio clips I create for class this year.</p>
+        </div>
+        
+        <div class="work-card placeholder-card">
+          <div class="placeholder-icon">📊</div>
+          <h3>Data Visualization</h3>
+          <div class="work-meta">
+            <span class="work-publication">Coming Soon</span>
+            <span>2025</span>
+          </div>
+          <p>Space to upload data visualizations like graphics, charts and maps that I create in class this year.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="contact" class="contact">
+    <div class="contact-content">
+      <div class="section-header">
+        <h2>Let's Connect</h2>
+        <p>Open to freelance writing, copy-editing and fact-checking work</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:zaranorman2026@u.northwestern.edu" class="contact-link">
+          <span>📧</span>
+          Email
+        </a>
+        <a href="https://linkedin.com/in/zaranorman" target="_blank" class="contact-link">
+          <span>💼</span>
+          LinkedIn
+        </a>
+        <a href="https://twitter.com/zaraleinorman" target="_blank" class="contact-link">
+          <span>🐦</span>
+          Twitter
+        </a>
+        <a href="resume.pdf" download class="contact-link">
+          <span>📄</span>
+          Resume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Zara Norman. This website template was created using generative AI but reviewed and edited by Zara Norman.</p>
+  </footer>
+
+  <script>
+    // Portfolio data
+    const workData = [
+      { 
+        category: 'investigative', 
+        title: 'Inside the effort to get this Maine contractor to pay for shoddy and undone work', 
+        url: 'https://www.bangordailynews.com/2024/10/01/business/business-housing/maine-contractor-jake-brown-jbrh-excavation-pay-shoddy-undone-work-joam40zk0w/', 
+        pub: 'Bangor Daily News', 
+        date: '2024-10-01', 
+        excerpt: 'Investigation into a contractor who took money upfront for shoddy or incomplete work with impunity.' 
+      },
+      { 
+        category: 'investigative', 
+        title: 'Rents skyrocketed after out-of-state investors bought Maine mobile home parks', 
+        url: 'https://www.bangordailynews.com/2024/03/26/business/business-housing/investors-twin-mobile-home-parks-rent-skyrocketed-joam40zk0w/', 
+        pub: 'Bangor Daily News', 
+        date: '2024-03-26', 
+        excerpt: 'Investigation into an out-of-state investor that bought a Maine mobile home park and spiked rents' 
+      },
+      { 
+        category: 'housing', 
+        title: 'How AI is transforming Maine real estate listings', 
+        url: 'https://www.bangordailynews.com/2025/05/27/business/business-housing/maine-real-estate-housing-artificial-intelligence-listings-joam40zk0w/', 
+        pub: 'Bangor Daily News', 
+        date: '2025-05-27', 
+        excerpt: 'Story about how Maine real estate agents are using AI, and what ethical concerns that poses' 
+      },
+      { 
+        category: 'housing', 
+        title: 'See how home values rose across Maine during the pandemic', 
+        url: 'https://www.bangordailynews.com/2025/04/23/business/business-housing/map-how-home-values-rose-across-maine-during-pandemic-joam40zk0w/', 
+        pub: 'Bangor Daily News', 
+        date: '2025-04-23', 
+        excerpt: 'Story and data visualization that shows where home values rose the most around Maine during the pandemic.' 
+      },
+      { 
+        category: 'housing', 
+        title: 'Maine is stifling this homemade solution to the housing crisis', 
+        url: 'https://www.bangordailynews.com/2025/01/20/business/business-housing/maine-is-stifling-this-homemade-solution-to-the-housing-crisis-joam40zk0w/', 
+        pub: 'Bangor Daily News', 
+        date: '2025-01-20', 
+        excerpt: 'Feature story that examines the modular housing industry in Maine' 
+      },
+      { 
+        category: 'breaking', 
+        title: 'Maine housing authorities can\'t access funds after Donald Trump freezes grants', 
+        url: 'https://www.bangordailynews.com/2025/01/28/bangor/bangor-housing-authority-funds-trump-federal-grants-freeze/', 
+        pub: 'Bangor Daily News', 
+        date: '2025-01-28', 
+        excerpt: 'Reaction story to a federal freeze on public housing authorities.' 
+      },
+      { 
+        category: 'breaking', 
+        title: 'Manhunt continues for alleged mass shooter that police didn\'t find in Bowdoin home', 
+        url: 'https://www.bangordailynews.com/2023/10/26/news/police-descend-home-close-alleged-maine-mass-shooter-lives/', 
+        pub: 'Bangor Daily News', 
+        date: '2023-10-26', 
+        excerpt: 'I was tasked with following the manhunt for Maine mass shooter Robert Card and reported this from a stake-out of a Card residence.' 
+      }
+    ];
+
+    // Render work items
+    function renderWork() {
+      const categories = {
+        'investigative': document.getElementById('investigative-grid'),
+        'housing': document.getElementById('housing-grid'),
+        'breaking': document.getElementById('breaking-grid'),
+        'multimedia': document.getElementById('multimedia-grid')
+      };
+
+      workData.forEach(item => {
+        if (categories[item.category]) {
+          const card = document.createElement('div');
+          card.className = 'work-card';
+          card.innerHTML = `
+            <h3><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h3>
+            <div class="work-meta">
+              <span class="work-publication">${item.pub}</span>
+              <span>${new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            </div>
+            <p>${item.excerpt}</p>
+          `;
+          categories[item.category].appendChild(card);
+        }
+      });
+    }
+
+    // Initialize
+    renderWork();
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(78, 42, 132, 0.98)';
+      } else {
+        header.style.background = 'rgba(78, 42, 132, 0.95)';
+      }
+    });
+  </script>
+</body>
+</html>
